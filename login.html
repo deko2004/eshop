@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - TechShop</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-900">
+    <!-- Header/Navigation -->
+    <header class="bg-gray-800 text-white shadow-lg mb-8">
+      <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-laptop text-red-500 text-2xl"></i>
+            <h2 class="text-3xl font-bold">
+              Tech<span class="text-red-500">Shop</span>
+            </h2>
+          </div>
+
+          <button
+            class="md:hidden text-white focus:outline-none hover:text-red-400 transition-colors duration-300"
+            onclick="toggleMenu()"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+
+          <div class="hidden md:flex justify-between items-center gap-8">
+            <ul class="flex items-center gap-8">
+              <li class="relative group">
+                <a
+                  href="index.html"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Home</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="shop.html"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Shop</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="index.html#about"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >About Us</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="index.html#contact"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Contact</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          id="mobileMenu"
+          class="hidden md:hidden mt-4 rounded-lg bg-gray-700 p-4 shadow-lg"
+        >
+          <ul class="flex flex-col gap-3">
+            <li>
+              <a
+                href="index.html"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="shop.html"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Shop
+              </a>
+            </li>
+            <li>
+              <a
+                href="index.html#about"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                About Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="index.html#contact"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Login Form -->
+    <div class="container mx-auto px-4 py-8">
+      <form
+        class="max-w-md mx-auto p-6 bg-gray-800 rounded-lg shadow-lg"
+        id="loginForm"
+      >
+        <p class="text-white text-center text-2xl font-bold mb-8">Login</p>
+
+        <div id="loginAlert" class="hidden mb-4 p-3 rounded text-center"></div>
+
+        <div class="space-y-6">
+          <div class="flex flex-col">
+            <label for="username" class="text-gray-200 mb-2">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+              required
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="password" class="text-gray-200 mb-2">Password</label>
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                required
+              />
+              <button
+                type="button"
+                class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white"
+                onclick="togglePasswordVisibility('password')"
+              >
+                <i class="fas fa-eye" id="password_icon"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center">
+            <input type="checkbox" id="remember" name="remember" class="mr-2" />
+            <label for="remember" class="text-gray-300 text-sm"
+              >Remember me</label
+            >
+            <div class="ml-auto">
+              <a href="#" class="text-gray-300 hover:text-red-400 text-sm"
+                >Forgot Password?</a
+              >
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-red-500 py-3 rounded-lg text-white font-bold hover:bg-red-600 transition duration-300 ease-in-out"
+          >
+            Sign in
+          </button>
+
+          <div class="text-center mt-4">
+            <p class="text-gray-300">
+              Don't have an account?
+              <a
+                href="signup.html"
+                class="text-red-400 hover:text-red-500 transition duration-300 ease-in-out"
+                >Sign up</a
+              >
+            </p>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      function toggleMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("hidden");
+      }
+
+      // Function to show alert message
+      function showAlert(message, type) {
+        const alertDiv = document.getElementById("loginAlert");
+        alertDiv.textContent = message;
+        alertDiv.className =
+          type === "success"
+            ? "mb-4 p-3 rounded text-center bg-green-600 text-white"
+            : "mb-4 p-3 rounded text-center bg-red-600 text-white";
+        alertDiv.classList.remove("hidden");
+
+        // Hide alert after 3 seconds
+        setTimeout(() => {
+          alertDiv.classList.add("hidden");
+        }, 3000);
+      }
+
+      // Function to toggle password visibility
+      function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const icon = document.getElementById(`${inputId}_icon`);
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          passwordInput.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
+      }
+
+      // Handle login form submission
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+          const remember = document.getElementById("remember").checked;
+
+          if (!username || !password) {
+            showAlert("Please enter both username and password", "error");
+            return;
+          }
+
+          try {
+            const response = await fetch(
+              "http://localhost/daw/backend/api/users/login.php",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  username: username,
+                  password: password,
+                  remember: remember,
+                }),
+              }
+            );
+
+            const data = await response.json();
+
+            if (data.status) {
+              showAlert("Login successful! Redirecting...", "success");
+
+              // Store user data in localStorage
+              localStorage.setItem("user", JSON.stringify(data.data));
+
+              // Check if there's a redirect parameter in the URL
+              const urlParams = new URLSearchParams(window.location.search);
+              const redirect = urlParams.get("redirect");
+
+              // Check if there's a pending purchase
+              const pendingPurchaseId =
+                localStorage.getItem("pendingPurchaseId");
+
+              // Redirect after 1 second
+              setTimeout(() => {
+                if (redirect === "checkout" && pendingPurchaseId) {
+                  // Redirect to checkout with the pending product
+                  window.location.href = `checkout.html?id=${pendingPurchaseId}`;
+                  // Clear the pending purchase
+                  localStorage.removeItem("pendingPurchaseId");
+                } else {
+                  // Default redirect to home page
+                  window.location.href = "index.html";
+                }
+              }, 1000);
+            } else {
+              showAlert(
+                data.message || "Login failed. Please try again.",
+                "error"
+              );
+            }
+          } catch (error) {
+            console.error("Error:", error);
+            showAlert("An error occurred. Please try again later.", "error");
+          }
+        });
+    </script>
+  </body>
+</html>

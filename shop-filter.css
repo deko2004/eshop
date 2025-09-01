@@ -1,0 +1,140 @@
+/* Shop Filter CSS */
+
+/* Animation for filter initialization */
+.filter-initialized {
+  animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(255, 59, 48, 0.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Transition for product cards */
+.product-card {
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.product-card.hidden {
+  opacity: 0;
+  transform: scale(0.9);
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* Search match subtle effect - without yellow highlighting */
+[data-search-match="true"] {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+/* No results message animation */
+#noResultsMessage {
+  transition: all 0.5s ease-out;
+  transform-origin: center;
+}
+
+#noResultsMessage.hidden {
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+#noResultsMessage:not(.hidden) {
+  opacity: 1;
+  transform: scale(1);
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Search input focus effect */
+#searchInput:focus {
+  box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.3);
+}
+
+/* Search suggestions styling */
+#searchSuggestions {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: none;
+  transition: all 0.2s ease;
+}
+
+#searchSuggestions::-webkit-scrollbar {
+  width: 8px;
+}
+
+#searchSuggestions::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 4px 0;
+}
+
+#searchSuggestions::-webkit-scrollbar-thumb {
+  background: rgba(255, 59, 48, 0.5);
+  border-radius: 4px;
+}
+
+#searchSuggestions::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 59, 48, 0.7);
+}
+
+.search-suggestion {
+  transition: background-color 0.2s ease;
+}
+
+.search-suggestion:hover {
+  background-color: rgba(255, 59, 48, 0.2) !important;
+}
+
+/* Clear search button animation */
+.fa-times-circle {
+  transition: transform 0.2s ease;
+}
+
+.fa-times-circle:hover {
+  transform: scale(1.2);
+}
+
+/* Search button animation */
+#searchButton {
+  transition: all 0.2s ease;
+}
+
+#searchButton:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 59, 48, 0.1);
+}
+
+#searchButton:active {
+  transform: scale(0.95);
+}
+
+/* Category filter hover effect */
+#categoryFilter option:hover {
+  background-color: rgba(255, 59, 48, 0.1);
+}
+
+/* Sort filter hover effect */
+#priceSort option:hover {
+  background-color: rgba(255, 59, 48, 0.1);
+}

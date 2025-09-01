@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile - TechShop</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-900">
+    <!-- Header/Navigation -->
+    <header class="bg-gray-800 text-white shadow-lg mb-8">
+      <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-laptop text-red-500 text-2xl"></i>
+            <h2 class="text-3xl font-bold">
+              Tech<span class="text-red-500">Shop</span>
+            </h2>
+          </div>
+
+          <button
+            class="md:hidden text-white focus:outline-none hover:text-red-400 transition-colors duration-300"
+            onclick="toggleMenu()"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+
+          <div class="hidden md:flex justify-between items-center gap-8">
+            <ul class="flex items-center gap-8">
+              <li class="relative group">
+                <a
+                  href="index.html"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Home</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="shop.html"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Shop</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="index.html#about"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >About Us</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="index.html#contact"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Contact</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+            </ul>
+            <!-- Auth buttons will be added by auth.js -->
+          </div>
+        </div>
+
+        <div
+          id="mobileMenu"
+          class="hidden md:hidden mt-4 rounded-lg bg-gray-700 p-4 shadow-lg"
+        >
+          <ul class="flex flex-col gap-3">
+            <li>
+              <a
+                href="index.html"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="shop.html"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Shop
+              </a>
+            </li>
+            <li>
+              <a
+                href="index.html#about"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                About Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="index.html#contact"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Profile Section -->
+    <div class="container mx-auto px-4 py-8">
+      <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold text-white mb-8 text-center">
+          My Profile
+        </h1>
+
+        <!-- Profile Tabs -->
+        <div class="mb-8">
+          <div class="flex border-b border-gray-700">
+            <button
+              id="profileTabBtn"
+              class="px-6 py-3 text-white font-medium border-b-2 border-red-500 focus:outline-none"
+            >
+              Profile Information
+            </button>
+            <button
+              id="passwordTabBtn"
+              class="px-6 py-3 text-gray-400 hover:text-white font-medium border-b-2 border-transparent hover:border-gray-600 focus:outline-none"
+            >
+              Change Password
+            </button>
+            <button
+              id="ordersTabBtn"
+              class="px-6 py-3 text-gray-400 hover:text-white font-medium border-b-2 border-transparent hover:border-gray-600 focus:outline-none"
+            >
+              Order History
+            </button>
+          </div>
+        </div>
+
+        <!-- Alert Message -->
+        <div
+          id="profileAlert"
+          class="hidden mb-6 p-3 rounded text-center"
+        ></div>
+
+        <!-- Profile Information Tab -->
+        <div id="profileTab" class="bg-gray-800 rounded-lg shadow-lg p-6">
+          <form id="profileForm" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="firstname" class="block text-gray-300"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  id="firstname"
+                  name="firstname"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="lastname" class="block text-gray-300"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  id="lastname"
+                  name="lastname"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="username" class="block text-gray-300"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  disabled
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="email" class="block text-gray-300">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="age" class="block text-gray-300">Age</label>
+                <input
+                  type="number"
+                  id="age"
+                  name="age"
+                  min="18"
+                  max="100"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="wilaya" class="block text-gray-300">Wilaya</label>
+                <input
+                  type="text"
+                  id="wilaya"
+                  name="wilaya"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="telephone" class="block text-gray-300"
+                  >Telephone</label
+                >
+                <input
+                  type="tel"
+                  id="telephone"
+                  name="telephone"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  required
+                />
+              </div>
+
+              <div class="space-y-2">
+                <label for="sex" class="block text-gray-300">Gender</label>
+                <select
+                  id="sex"
+                  name="sex"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  disabled
+                >
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+
+              <div class="space-y-2 md:col-span-2">
+                <label for="address" class="block text-gray-300">Address</label>
+                <textarea
+                  id="address"
+                  name="address"
+                  rows="3"
+                  class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                  required
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out"
+              >
+                Update Profile
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Change Password Tab -->
+        <div
+          id="passwordTab"
+          class="hidden bg-gray-800 rounded-lg shadow-lg p-6"
+        >
+          <form id="passwordForm" class="space-y-6">
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <label for="current_password" class="block text-gray-300"
+                  >Current Password</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    id="current_password"
+                    name="current_password"
+                    class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white"
+                    onclick="togglePasswordVisibility('current_password')"
+                  >
+                    <i class="fas fa-eye" id="current_password_icon"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="space-y-2">
+                <label for="new_password" class="block text-gray-300"
+                  >New Password</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    id="new_password"
+                    name="new_password"
+                    class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white"
+                    onclick="togglePasswordVisibility('new_password')"
+                  >
+                    <i class="fas fa-eye" id="new_password_icon"></i>
+                  </button>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">
+                  Password must be at least 8 characters and include uppercase,
+                  lowercase, and numbers
+                </p>
+              </div>
+
+              <div class="space-y-2">
+                <label for="confirm_password" class="block text-gray-300"
+                  >Confirm New Password</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    class="bg-gray-700 text-white p-3 rounded-lg w-full border border-gray-600 focus:border-red-400 focus:outline-none"
+                    required
+                  />
+                  <button
+                    type="button"
+                    class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white"
+                    onclick="togglePasswordVisibility('confirm_password')"
+                  >
+                    <i class="fas fa-eye" id="confirm_password_icon"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex justify-end">
+              <button
+                type="submit"
+                class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out"
+              >
+                Change Password
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Order History Tab -->
+        <div id="ordersTab" class="hidden bg-gray-800 rounded-lg shadow-lg p-6">
+          <div id="ordersList" class="space-y-4">
+            <p class="text-center text-gray-400">Loading your orders...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script>
+      // Check if user is logged in
+      document.addEventListener("DOMContentLoaded", async function () {
+        const { isLoggedIn, user } = await checkAuth();
+
+        if (!isLoggedIn) {
+          // Redirect to login page if not logged in
+          window.location.href = "login.html";
+          return;
+        }
+
+        // Load profile data
+        loadProfileData();
+
+        // Load order history
+        loadOrderHistory();
+
+        // Check if we should show a specific tab (from URL parameter)
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get("tab");
+
+        if (tabParam === "orders") {
+          // Trigger click on orders tab
+          document.getElementById("ordersTabBtn").click();
+        }
+      });
+
+      function toggleMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("hidden");
+      }
+
+      // Function to show alert message
+      function showAlert(message, type) {
+        const alertDiv = document.getElementById("profileAlert");
+        alertDiv.textContent = message;
+        alertDiv.className =
+          type === "success"
+            ? "mb-6 p-3 rounded text-center bg-green-600 text-white"
+            : "mb-6 p-3 rounded text-center bg-red-600 text-white";
+        alertDiv.classList.remove("hidden");
+
+        // Hide alert after 3 seconds if it's a success message
+        if (type === "success") {
+          setTimeout(() => {
+            alertDiv.classList.add("hidden");
+          }, 3000);
+        }
+      }
+
+      // Tab switching functionality
+      const profileTabBtn = document.getElementById("profileTabBtn");
+      const passwordTabBtn = document.getElementById("passwordTabBtn");
+      const ordersTabBtn = document.getElementById("ordersTabBtn");
+
+      const profileTab = document.getElementById("profileTab");
+      const passwordTab = document.getElementById("passwordTab");
+      const ordersTab = document.getElementById("ordersTab");
+
+      profileTabBtn.addEventListener("click", function () {
+        // Update tab buttons
+        profileTabBtn.className =
+          "px-6 py-3 text-white font-medium border-b-2 border-red-500 focus:outline-none";
+        passwordTabBtn.className =
+          "px-6 py-3 text-gray-400 hover:text-white font-medium border-b-2 border-transparent hover:border-gray-600 focus:outline-none";
+        ordersTabBtn.className =
+          "px-6 py-3 text-gray-400 hover:text-white font-medium border-b-2 border-transparent hover:border-gray-600 focus:outline-none";
+
+        // Show/hide tabs
+        profileTab.classList.remove("hidden");
+        passwordTab.classList.add("hidden");
+        ordersTab.classList.add("hidden");
+
+        // Hide any alerts
+        document.getElementById("profileAlert").classList.add("hidden");
+      });
+
+      passwordTabBtn.addEventListener("click", function () {
+        // Update tab buttons
+        profileTabBtn.className =
+          "px-6 py-3 text-gray-400 hover:text-white font-medium border-b-2 border-transparent hover:border-gray-600 focus:outline-none";
+        passwordTabBtn.className =
+          "px-6 py-3 text-white font-medium border-b-2 border-red-500 focus:outline-none";
+        ordersTabBtn.className =
+          "px-6 py-3 text-gray-400 hover:text-white font-medium border-b-2 border-transparent hover:border-gray-600 focus:outline-none";
+
+        // Show/hide tabs
+        profileTab.classList.add("hidden");
+        passwordTab.classList.remove("hidden");
+        ordersTab.classList.add("hidden");
+
+        // Hide any alerts
+        document.getElementById("profileAlert").classList.add("hidden");
+      });
+
+      ordersTabBtn.addEventListener("click", function () {
+        // Update tab buttons
+        profileTabBtn.className =
+          "px-6 py-3 text-gray-400 hover:text-white font-medium border-b-2 border-transparent hover:border-gray-600 focus:outline-none";
+        passwordTabBtn.className =
+          "px-6 py-3 text-gray-400 hover:text-white font-medium border-b-2 border-transparent hover:border-gray-600 focus:outline-none";
+        ordersTabBtn.className =
+          "px-6 py-3 text-white font-medium border-b-2 border-red-500 focus:outline-none";
+
+        // Show/hide tabs
+        profileTab.classList.add("hidden");
+        passwordTab.classList.add("hidden");
+        ordersTab.classList.remove("hidden");
+
+        // Hide any alerts
+        document.getElementById("profileAlert").classList.add("hidden");
+      });
+
+      // Load profile data from API
+      async function loadProfileData() {
+        try {
+          const response = await fetch("backend/api/users/profile.php");
+          const data = await response.json();
+
+          if (data.status) {
+            // Fill form with user data
+            document.getElementById("firstname").value = data.data.firstname;
+            document.getElementById("lastname").value = data.data.lastname;
+            document.getElementById("username").value = data.data.username;
+            document.getElementById("email").value = data.data.email;
+            document.getElementById("age").value = data.data.age;
+            document.getElementById("wilaya").value = data.data.wilaya;
+            document.getElementById("telephone").value = data.data.telephone;
+            document.getElementById("address").value = data.data.address;
+            document.getElementById("sex").value = data.data.sex;
+          } else {
+            showAlert("Failed to load profile data: " + data.message, "error");
+          }
+        } catch (error) {
+          console.error("Error loading profile data:", error);
+          showAlert(
+            "An error occurred while loading profile data. Please try again later.",
+            "error"
+          );
+        }
+      }
+
+      // Handle profile form submission
+      document
+        .getElementById("profileForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const firstname = document.getElementById("firstname").value;
+          const lastname = document.getElementById("lastname").value;
+          const email = document.getElementById("email").value;
+          const age = document.getElementById("age").value;
+          const wilaya = document.getElementById("wilaya").value;
+          const telephone = document.getElementById("telephone").value;
+          const address = document.getElementById("address").value;
+
+          // Basic validation
+          if (
+            !firstname ||
+            !lastname ||
+            !email ||
+            !age ||
+            !wilaya ||
+            !telephone ||
+            !address
+          ) {
+            showAlert("All fields are required", "error");
+            return;
+          }
+
+          try {
+            const response = await fetch("backend/api/users/profile.php", {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                firstname,
+                lastname,
+                email,
+                age,
+                wilaya,
+                telephone,
+                address,
+              }),
+            });
+
+            const data = await response.json();
+
+            if (data.status) {
+              showAlert("Profile updated successfully", "success");
+            } else {
+              showAlert(data.message || "Failed to update profile", "error");
+            }
+          } catch (error) {
+            console.error("Error updating profile:", error);
+            showAlert("An error occurred. Please try again later.", "error");
+          }
+        });
+
+      // Function to toggle password visibility
+      function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const icon = document.getElementById(`${inputId}_icon`);
+
+        if (passwordInput.type === "password") {
+          passwordInput.type = "text";
+          icon.classList.remove("fa-eye");
+          icon.classList.add("fa-eye-slash");
+        } else {
+          passwordInput.type = "password";
+          icon.classList.remove("fa-eye-slash");
+          icon.classList.add("fa-eye");
+        }
+      }
+
+      // Handle password form submission
+      document
+        .getElementById("passwordForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const current_password =
+            document.getElementById("current_password").value;
+          const new_password = document.getElementById("new_password").value;
+          const confirm_password =
+            document.getElementById("confirm_password").value;
+
+          // Basic validation
+          if (!current_password || !new_password || !confirm_password) {
+            showAlert("All fields are required", "error");
+            return;
+          }
+
+          if (new_password !== confirm_password) {
+            showAlert("New passwords do not match", "error");
+            return;
+          }
+
+          try {
+            const response = await fetch(
+              "backend/api/users/change_password.php",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  current_password,
+                  new_password,
+                  confirm_password,
+                }),
+              }
+            );
+
+            const data = await response.json();
+
+            if (data.status) {
+              showAlert("Password changed successfully", "success");
+              document.getElementById("passwordForm").reset();
+            } else {
+              showAlert(data.message || "Failed to change password", "error");
+            }
+          } catch (error) {
+            console.error("Error changing password:", error);
+            showAlert("An error occurred. Please try again later.", "error");
+          }
+        });
+
+      // Load order history
+      async function loadOrderHistory() {
+        try {
+          const response = await fetch("backend/api/orders/history.php");
+          const data = await response.json();
+
+          const ordersListElement = document.getElementById("ordersList");
+
+          if (data.orders && data.orders.length > 0) {
+            // Clear loading message
+            ordersListElement.innerHTML = "";
+
+            // Create order cards
+            data.orders.forEach((order) => {
+              const orderDate = new Date(order.created_at).toLocaleDateString();
+              const orderStatus =
+                order.status.charAt(0).toUpperCase() + order.status.slice(1);
+
+              const orderCard = document.createElement("div");
+              orderCard.className = "bg-gray-700 rounded-lg p-4 shadow";
+
+              let itemsHtml = "";
+              order.items.forEach((item) => {
+                itemsHtml += `
+                  <div class="flex items-center justify-between py-2 border-b border-gray-600">
+                    <div class="flex items-center">
+                      <img src="${item.image}" alt="${
+                  item.name
+                }" class="w-12 h-12 object-cover rounded mr-3" />
+                      <div>
+                        <p class="text-white">${item.name}</p>
+                        <p class="text-sm text-gray-400">Quantity: ${
+                          item.quantity
+                        }</p>
+                      </div>
+                    </div>
+                    <p class="text-white">$${parseFloat(
+                      item.item_price
+                    ).toFixed(2)}</p>
+                  </div>
+                `;
+              });
+
+              orderCard.innerHTML = `
+                <div class="flex justify-between items-center mb-4">
+                  <div>
+                    <p class="text-gray-400 text-sm">Order #${order.id}</p>
+                    <p class="text-white font-medium">${orderDate}</p>
+                  </div>
+                  <div>
+                    <span class="px-3 py-1 bg-gray-600 text-white rounded-full text-sm">${orderStatus}</span>
+                  </div>
+                </div>
+
+                <div class="mb-4">
+                  ${itemsHtml}
+                </div>
+
+                <div class="flex justify-between items-center pt-2">
+                  <p class="text-white font-medium">Total:</p>
+                  <p class="text-white font-bold">$${parseFloat(
+                    order.total_amount
+                  ).toFixed(2)}</p>
+                </div>
+              `;
+
+              ordersListElement.appendChild(orderCard);
+            });
+          } else {
+            ordersListElement.innerHTML =
+              '<p class="text-center text-gray-400">You have no orders yet.</p>';
+          }
+        } catch (error) {
+          console.error("Error loading order history:", error);
+          document.getElementById("ordersList").innerHTML =
+            '<p class="text-center text-red-400">Failed to load order history. Please try again later.</p>';
+        }
+      }
+    </script>
+  </body>
+</html>

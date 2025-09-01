@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechShop - Shop</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
+    <!-- Header/Navigation -->
+    <header class="bg-gray-800 text-white sticky top-0 z-50 shadow-lg">
+      <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-laptop text-red-500 text-2xl"></i>
+            <h2 class="text-3xl font-bold">
+              Tech<span class="text-red-500">Shop</span>
+            </h2>
+          </div>
+
+          <button
+            class="md:hidden text-white focus:outline-none hover:text-red-400 transition-colors duration-300"
+            onclick="toggleMenu()"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+
+          <div class="hidden md:flex justify-between items-center gap-8">
+            <ul class="flex items-center gap-8">
+              <li class="relative group">
+                <a
+                  href="index.html"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Home</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="#"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Shop</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="index.html#about"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >About Us</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="index.html#contact"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Contact</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+            </ul>
+            <!-- Auth buttons will be added by auth.js -->
+          </div>
+        </div>
+
+        <div
+          id="mobileMenu"
+          class="hidden md:hidden mt-4 rounded-lg bg-gray-700 p-4 shadow-lg"
+        >
+          <ul class="flex flex-col gap-3">
+            <li>
+              <a
+                href="index.html"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Shop
+              </a>
+            </li>
+            <li>
+              <a
+                href="index.html#about"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                About Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="index.html#contact"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+          <!-- Mobile auth buttons will be added by auth.js -->
+        </div>
+      </nav>
+    </header>
+
+    <!-- Enhanced Search and Filter Section -->
+    <div class="container mx-auto px-4 py-8">
+      <div
+        class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8"
+      >
+        <div class="w-full md:w-1/2">
+          <div class="relative group">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Search products..."
+              class="w-full py-3 px-4 pl-12 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-red-400 focus:ring-2 focus:ring-red-500 focus:ring-opacity-30 transition-all duration-300"
+            />
+            <div
+              id="searchButton"
+              class="absolute left-4 top-3.5 text-gray-400 group-hover:text-red-400 transition-colors duration-300 cursor-pointer"
+            >
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-auto flex flex-col sm:flex-row gap-4">
+          <select
+            id="categoryFilter"
+            class="bg-gray-800 text-white py-3 px-4 rounded-lg border border-gray-700 focus:outline-none focus:border-red-400 focus:ring-2 focus:ring-red-500 focus:ring-opacity-30 transition-all duration-300 cursor-pointer"
+          >
+            <option value="all">All Categories</option>
+            <option value="headphones">Headphones</option>
+            <option value="keyboards">Keyboards</option>
+            <option value="laptops">Laptops</option>
+            <option value="accessories">Accessories</option>
+          </select>
+          <select
+            id="priceSort"
+            class="bg-gray-800 text-white py-3 px-4 rounded-lg border border-gray-700 focus:outline-none focus:border-red-400 focus:ring-2 focus:ring-red-500 focus:ring-opacity-30 transition-all duration-300 cursor-pointer"
+          >
+            <option value="default">Sort by: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="newest">Newest First</option>
+            <option value="rating">Top Rated</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Current Sale Banner -->
+    <div class="container mx-auto px-4 mb-8">
+      <div
+        class="bg-gradient-to-r from-gray-800 to-gray-700 rounded-xl p-6 shadow-lg relative overflow-hidden"
+      >
+        <div
+          class="absolute top-0 right-0 w-40 h-40 bg-red-500 rounded-full opacity-20 -mr-16 -mt-16"
+        ></div>
+        <div
+          class="absolute bottom-0 left-0 w-24 h-24 bg-red-500 rounded-full opacity-20 -ml-10 -mb-10"
+        ></div>
+        <div
+          class="relative z-10 flex flex-col md:flex-row items-center justify-between"
+        >
+          <div class="mb-4 md:mb-0">
+            <h3 class="text-2xl font-bold mb-2">Summer Tech Sale</h3>
+            <p class="text-gray-300">Get up to 40% off on selected items</p>
+          </div>
+          <button
+            class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50"
+          >
+            Shop Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="container mx-auto px-4 mb-12">
+      <h2 class="text-2xl font-bold mb-6 text-white">Featured Products</h2>
+      <div
+        id="productGrid"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      >
+        <!-- Product Card 1 -->
+        <div
+          data-category="headphones"
+          data-product-id="1"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <!-- Product Image Container with hover zoom effect -->
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-red-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >NEW</span
+            >
+            <img
+              src="imgs/headphone4.webp"
+              alt="Premium Headphones"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+
+          <!-- Product Info -->
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">Premium Headphones</h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >Wireless Noise Cancelling</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$129.99</p>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(1)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div
+          data-category="headphones"
+          data-product-id="2"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-amber-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >SALE</span
+            >
+            <img
+              src="imgs/airpod1.webp"
+              alt="Wireless Earbuds"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">Wireless Earbuds</h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >True Wireless • Water Resistant</span
+              >
+              <div class="flex items-center gap-2 mt-2">
+                <p class="text-red-400 text-xl font-semibold">$89.99</p>
+                <p class="text-gray-400 text-sm line-through">$119.99</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(2)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div
+          data-category="headphones"
+          data-product-id="3"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <img
+              src="imgs/headphone1.webp"
+              alt="Studio Headphones"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">Gaming Headset</h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >Professional Audio • Wired</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$149.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(3)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 4 -->
+        <div
+          data-category="keyboards"
+          data-product-id="4"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-green-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >BEST SELLER</span
+            >
+            <img
+              src="imgs/key1.png"
+              alt="Mechanical Keyboard"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">
+                  Mechanical Keyboard
+                </h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >RGB Backlit • Blue Switches</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$79.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(4)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 5 -->
+        <div
+          data-category="keyboards"
+          data-product-id="5"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <img
+              src="imgs/keyboard1.webp"
+              alt="Gaming Keyboard"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">
+                  Pro Gaming Keyboard
+                </h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >Customizable RGB • Macro Keys</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$109.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(5)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 6 -->
+        <div
+          data-category="headphones"
+          data-product-id="6"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-amber-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >SALE</span
+            >
+            <img
+              src="imgs/cd823ace-e5a4-4dbb-a98b-52425a09763d.006870179db6e5b7712d999447379a7b.webp"
+              alt="Airpods 2"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">Airpods 2</h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >Wireless • Touch Controls</span
+              >
+              <div class="flex items-center gap-2 mt-2">
+                <p class="text-red-400 text-xl font-semibold">$39.99</p>
+                <p class="text-gray-400 text-sm line-through">$59.99</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(6)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 7 -->
+        <div
+          data-category="headphones"
+          data-product-id="7"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <img
+              src="imgs/head2.png"
+              alt="Gaming Headset"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">Gaming Headset</h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >7.1 Surround Sound • RGB</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$99.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(7)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 8 -->
+        <div
+          data-category="laptops"
+          data-product-id="8"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-blue-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >PRE-ORDER</span
+            >
+            <img
+              src="imgs/laptop1.webp"
+              alt="Gaming Laptop"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">Gaming Laptop</h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >RTX 4060 • 16GB RAM • 1TB SSD</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$1,299.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(8)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 9 -->
+        <div
+          data-category="headphones"
+          data-product-id="9"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-red-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >NEW</span
+            >
+            <img
+              src="imgs/headphone2.webp"
+              alt="HOCO EW54 Noise‑Cancelling"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">
+                  HOCO EW54 Noise‑Cancelling
+                </h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >Active Noise Cancelling • Wireless</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$69.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(9)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 10 -->
+        <div
+          data-category="headphones"
+          data-product-id="10"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-green-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >BEST SELLER</span
+            >
+            <img
+              src="imgs/boat203-1.png"
+              alt="HOCO EW54 Sports Headphones"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">
+                  HOCO EW54 Sports Headphones
+                </h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >Sweat Resistant • Sports Fit</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$59.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(10)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 11 -->
+        <div
+          data-category="headphones"
+          data-product-id="11"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <img
+              src="imgs/sony10.png"
+              alt="Sony Wireless Headphones"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">
+                  Sony Wireless Headphones
+                </h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="far fa-star"></i>
+                  <i class="far fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >High-Fidelity Audio • Over-Ear</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$39.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(11)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 12 -->
+        <div
+          data-category="accessories"
+          data-product-id="12"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-amber-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >SALE</span
+            >
+            <img
+              src="imgs/souris1.webp"
+              alt="Gaming Mouse"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">Gaming Mouse</h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >Ergonomic • Programmable Buttons</span
+              >
+              <div class="flex items-center gap-2 mt-2">
+                <p class="text-red-400 text-xl font-semibold">$129.99</p>
+                <p class="text-gray-400 text-sm line-through">$149.99</p>
+              </div>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(12)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 13 -->
+        <div
+          data-category="laptops"
+          data-product-id="13"
+          class="product-card bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:border-red-400 transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl group"
+        >
+          <div class="relative h-56 bg-gray-900 overflow-hidden">
+            <span
+              class="absolute top-3 right-3 bg-blue-500 text-xs text-white font-bold px-2 py-1 rounded-md z-10"
+              >PREMIUM</span
+            >
+            <img
+              src="imgs/laptop2.png"
+              alt="MacBook Pro 16-inch"
+              class="w-full h-full object-contain p-4 transform group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+          <div class="p-5">
+            <div class="mb-4">
+              <div class="flex items-center justify-between mb-1">
+                <h3 class="text-lg font-bold text-white">
+                  MacBook Pro 16-inch
+                </h3>
+                <div class="flex text-amber-400 text-xs">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+                </div>
+              </div>
+              <span class="text-gray-400 text-sm"
+                >M2 Pro/Max • 16-inch Retina Display</span
+              >
+              <p class="text-red-400 text-xl font-semibold mt-2">$2,399.99</p>
+            </div>
+            <div class="flex gap-3">
+              <button
+                class="flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center"
+                onclick="handledetail(13)"
+              >
+                <i class="fas fa-eye mr-2"></i> Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-8">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">About Us</h3>
+            <p class="text-gray-400">
+              Your one-stop shop for all tech accessories and gadgets.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="index.html" class="text-gray-400 hover:text-white"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-gray-400 hover:text-white">Shop</a>
+              </li>
+              <li>
+                <a
+                  href="index.html#about"
+                  class="text-gray-400 hover:text-white"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#contact"
+                  class="text-gray-400 hover:text-white"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+            <ul class="space-y-2">
+              <li class="text-gray-400">
+                <i class="fas fa-phone mr-2"></i> +1 234 567 890
+              </li>
+              <li class="text-gray-400">
+                <i class="fas fa-envelope mr-2"></i> info@techshop.com
+              </li>
+              <li class="text-gray-400">
+                <i class="fas fa-map-marker-alt mr-2"></i> 123 Tech Street
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Newsletter</h3>
+            <p class="text-gray-400 mb-4">
+              Subscribe to get special offers and updates.
+            </p>
+            <form class="flex">
+              <input
+                type="email"
+                placeholder="Your email"
+                class="flex-1 px-4 py-2 bg-gray-700 border border-gray-600 rounded-l-lg focus:outline-none focus:border-red-500 text-white"
+              />
+              <button
+                class="bg-red-500 hover:bg-red-600 text-white px-4 rounded-r-lg transition-colors duration-300"
+              >
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">© 2025 Tech Shop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <link rel="stylesheet" href="shop-filter.css" />
+    <script src="products.js"></script>
+    <script src="auth.js"></script>
+    <script src="shop-filter.js"></script>
+    <script>
+      // Alert Message Container
+      const alertContainer = document.createElement("div");
+      alertContainer.id = "shopAlert";
+      alertContainer.className =
+        "hidden fixed top-20 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg";
+      document.body.appendChild(alertContainer);
+
+      function toggleMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("hidden");
+      }
+
+      function handledetail(productId) {
+        window.location.href = `product.html?id=${productId}`;
+      }
+
+      // Function to show alert message
+      function showAlert(message, type) {
+        const alertDiv = document.getElementById("shopAlert");
+        alertDiv.textContent = message;
+        alertDiv.className =
+          type === "success"
+            ? "fixed top-20 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg bg-green-600 text-white"
+            : "fixed top-20 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg bg-red-600 text-white";
+
+        // Hide alert after 3 seconds
+        setTimeout(() => {
+          alertDiv.className =
+            "hidden fixed top-20 left-1/2 transform -translate-x-1/2 z-50 p-4 rounded-lg shadow-lg";
+        }, 3000);
+      }
+
+      // Function to handle buy now button click
+      function handleBuyNow(productId) {
+        window.location.href = `checkout.html?id=${productId}`;
+      }
+
+      // Update product cards with details and buy now buttons
+      document.addEventListener("DOMContentLoaded", function () {
+        const productCards = document.querySelectorAll(
+          ".bg-gray-800.rounded-xl"
+        );
+
+        productCards.forEach((card, index) => {
+          const productId = index + 1; // Assuming product IDs start from 1
+          const actionButtonsContainer = card.querySelector(".flex.gap-3");
+
+          if (actionButtonsContainer) {
+            // Clear existing buttons
+            actionButtonsContainer.innerHTML = "";
+
+            // Create Buy Now button
+            const buyNowButton = document.createElement("button");
+            buyNowButton.className =
+              "flex-1 bg-red-500 hover:bg-red-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center";
+            buyNowButton.innerHTML =
+              '<i class="fas fa-shopping-bag mr-2"></i> Buy Now';
+            buyNowButton.onclick = function () {
+              handleBuyNow(productId);
+            };
+
+            // Create Details button
+            const detailsButton = document.createElement("button");
+            detailsButton.className =
+              "flex-1 bg-gray-700 hover:bg-gray-600 text-white font-medium py-2 rounded-lg transition-colors duration-300 flex items-center justify-center";
+            detailsButton.innerHTML = '<i class="fas fa-eye mr-2"></i> Details';
+            detailsButton.onclick = function () {
+              handledetail(productId);
+            };
+
+            // Add buttons to container
+            actionButtonsContainer.appendChild(buyNowButton);
+            actionButtonsContainer.appendChild(detailsButton);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

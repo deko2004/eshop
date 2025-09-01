@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-900">
+    <header class="bg-gray-800 text-white sticky top-0 z-50 shadow-lg">
+      <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-laptop text-red-500 text-2xl"></i>
+            <h2 class="text-3xl font-bold">
+              Tech<span class="text-red-500">Shop</span>
+            </h2>
+          </div>
+
+          <!-- Mobile menu button -->
+          <button
+            class="md:hidden text-white focus:outline-none hover:text-red-400 transition-colors duration-300"
+            onclick="toggleMenu()"
+          >
+            <i class="fas fa-bars text-2xl"></i>
+          </button>
+
+          <!-- Desktop Navigation with improved hover effects -->
+          <div class="hidden md:flex justify-between items-center gap-8">
+            <ul class="flex items-center gap-8">
+              <li class="relative group">
+                <a
+                  href="index.html"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Home</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="shop.html"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Shop</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="index.html#about"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >About Us</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+              <li class="relative group">
+                <a
+                  href="index.html#contact"
+                  class="hover:text-red-400 transition-colors duration-300 py-2"
+                  >Contact</a
+                >
+                <div
+                  class="absolute h-0.5 w-0 bg-red-500 left-0 bottom-0 transition-all duration-300 group-hover:w-full"
+                ></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Improved Mobile Navigation with smoother animations -->
+        <div
+          id="mobileMenu"
+          class="hidden md:hidden mt-4 rounded-lg bg-gray-700 p-4 shadow-lg"
+        >
+          <ul class="flex flex-col gap-3">
+            <li>
+              <a
+                href="index.html"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="shop.html"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Shop
+              </a>
+            </li>
+            <li>
+              <a
+                href="index.html#about"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                About Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="index.html#contact"
+                class="block py-2 px-3 rounded hover:bg-gray-600 hover:text-red-400 transition-colors duration-300"
+              >
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="container mx-auto px-4 py-8">
+      <div class="max-w-6xl mx-auto">
+        <div id="productDetails" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Content will be dynamically inserted here -->
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white p-8 mt-12">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">About Us</h3>
+            <p class="text-gray-400">
+              Your one-stop shop for all tech accessories and gadgets.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="index.html" class="text-gray-400 hover:text-white"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="shop.html" class="text-gray-400 hover:text-white"
+                  >Shop</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#about"
+                  class="text-gray-400 hover:text-white"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#contact"
+                  class="text-gray-400 hover:text-white"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+            <ul class="space-y-2">
+              <li class="text-gray-400">
+                <i class="fas fa-phone mr-2"></i> +1 234 567 890
+              </li>
+              <li class="text-gray-400">
+                <i class="fas fa-envelope mr-2"></i> info@techshop.com
+              </li>
+              <li class="text-gray-400">
+                <i class="fas fa-map-marker-alt mr-2"></i> 123 Tech Street
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">© 2025 Tech Shop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="products.js"></script>
+    <script src="auth.js"></script>
+    <script>
+      // Get product ID from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = parseInt(urlParams.get("id"));
+
+      // Find the product
+      const product = products.find((p) => p.id === productId);
+
+      if (product) {
+        // Update page title
+        document.title = `${product.name} - Product Details`;
+
+        // Create product details HTML
+        const productHTML = `
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}"
+                         class="w-full rounded-lg shadow-xl">
+                </div>
+                <div class="product-info space-y-6">
+                    <h1 class="text-3xl font-bold text-white">${
+                      product.name
+                    }</h1>
+                    <p class="text-xl text-red-400">$${product.price.toFixed(
+                      2
+                    )}</p>
+                    <p class="text-gray-300">${product.description}</p>
+
+                    <div class="features">
+                        <h2 class="text-xl font-bold text-white mb-3">Key Features</h2>
+                        <ul class="list-disc list-inside space-y-2 text-gray-300">
+                            ${product.features
+                              .map((feature) => `<li>${feature}</li>`)
+                              .join("")}
+                        </ul>
+                    </div>
+
+                    <div class="specifications">
+                        <h2 class="text-xl font-bold text-white mb-3">Specifications</h2>
+                        <div class="grid grid-cols-2 gap-4 text-gray-300">
+                            ${Object.entries(product.specifications)
+                              .map(
+                                ([key, value]) => `
+                                    <div class="spec-item">
+                                        <span class="font-semibold">${
+                                          key.charAt(0).toUpperCase() +
+                                          key.slice(1)
+                                        }:</span>
+                                        <span>${value}</span>
+                                    </div>
+                                `
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+
+                    <div class="mt-8 space-x-4">
+                        <button onclick="handleBuyNow(${
+                          product.id
+                        })" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300">
+                            <i class="fas fa-shopping-bag mr-2"></i> Buy Now
+                        </button>
+                        <a href="shop.html" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300 inline-block">
+                            <i class="fas fa-arrow-left mr-2"></i> Back to Shop
+                        </a>
+                    </div>
+                </div>
+            `;
+
+        document.getElementById("productDetails").innerHTML = productHTML;
+      } else {
+        // Handle product not found
+        document.getElementById("productDetails").innerHTML = `
+                <div class="col-span-2 text-center text-white">
+                    <h1 class="text-3xl font-bold">Product Not Found</h1>
+                    <p class="mt-4">The product you're looking for doesn't exist.</p>
+                    <a href="shop.html" class="inline-block mt-6 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg">
+                        Return to Shop
+                    </a>
+                </div>
+            `;
+      }
+
+      function handlehome() {
+        window.location.href = "index.html";
+      }
+
+      function handleBuyNow(productId) {
+        window.location.href = `checkout.html?id=${productId}`;
+      }
+    </script>
+  </body>
+</html>

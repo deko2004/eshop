@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout - TechShop</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-gray-900 text-gray-100 min-h-screen flex flex-col">
+    <!-- Header/Navigation -->
+    <header class="bg-gray-800 text-white sticky top-0 z-50 shadow-lg">
+      <nav class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-2">
+            <i class="fas fa-laptop text-red-500 text-2xl"></i>
+            <h2 class="text-3xl font-bold">
+              <a href="index.html" class="hover:text-red-400">TechShop</a>
+            </h2>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex justify-between items-center gap-8">
+            <div class="flex space-x-6">
+              <a href="index.html" class="hover:text-red-400">Home</a>
+              <a href="shop.html" class="hover:text-red-400">Shop</a>
+              <a href="index.html#about" class="hover:text-red-400">About</a>
+              <a href="index.html#contact" class="hover:text-red-400"
+                >Contact</a
+              >
+            </div>
+            <!-- Auth buttons will be added here by auth.js -->
+          </div>
+
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden">
+            <button
+              onclick="toggleMenu()"
+              class="text-white focus:outline-none"
+            >
+              <i class="fas fa-bars text-xl"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div id="mobileMenu" class="md:hidden hidden mt-4 pb-2">
+          <div class="flex flex-col space-y-3">
+            <a href="index.html" class="hover:text-red-400">Home</a>
+            <a href="shop.html" class="hover:text-red-400">Shop</a>
+            <a href="index.html#about" class="hover:text-red-400">About</a>
+            <a href="index.html#contact" class="hover:text-red-400">Contact</a>
+          </div>
+          <!-- Mobile auth buttons will be added here by auth.js -->
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold mb-8">Checkout</h1>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Order Summary -->
+        <div id="orderSummary" class="bg-gray-800 rounded-lg p-6 h-fit">
+          <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+
+          <div id="productSummary" class="mb-6">
+            <!-- Product summary will be loaded here by JavaScript -->
+            <div class="text-center py-4">
+              <i class="fas fa-spinner fa-spin text-2xl text-gray-400 mb-2"></i>
+              <p class="text-gray-400">Loading product...</p>
+            </div>
+          </div>
+
+          <div class="space-y-3 mb-6 border-t border-gray-700 pt-3">
+            <div class="flex justify-between font-bold">
+              <span>Total</span>
+              <span id="total">$0.00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Simplified Checkout Form -->
+        <div class="bg-gray-800 rounded-lg p-6">
+          <h2 class="text-xl font-bold mb-6">Confirm Your Order</h2>
+
+          <form id="checkoutForm" class="space-y-6">
+            <div class="bg-gray-700 rounded-lg p-4 border border-gray-600">
+              <p class="text-gray-300 mb-2">
+                Welcome back! We'll use your saved shipping address for this
+                order.
+              </p>
+              <p class="text-gray-400 text-sm">
+                You can change your default address in your account settings.
+              </p>
+            </div>
+
+            <div class="pt-4">
+              <h3 class="text-lg font-bold mb-4">Payment Method</h3>
+
+              <div class="space-y-3">
+                <label
+                  class="flex items-center space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="creditCard"
+                    checked
+                    class="text-red-500 focus:ring-red-500"
+                  />
+                  <span class="text-white">Credit Card</span>
+                </label>
+
+                <label
+                  class="flex items-center space-x-3 p-3 bg-gray-700 rounded-lg border border-gray-600 cursor-pointer"
+                >
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value="paypal"
+                    class="text-red-500 focus:ring-red-500"
+                  />
+                  <span class="text-white">PayPal</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="pt-4">
+              <button
+                type="submit"
+                id="placeOrderBtn"
+                class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition-all duration-300"
+              >
+                Complete Purchase
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-8 mt-12">
+      <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold mb-4">About Us</h3>
+            <p class="text-gray-400">
+              Your one-stop shop for all tech accessories and gadgets.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="index.html" class="text-gray-400 hover:text-white"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a href="shop.html" class="text-gray-400 hover:text-white"
+                  >Shop</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#about"
+                  class="text-gray-400 hover:text-white"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a
+                  href="index.html#contact"
+                  class="text-gray-400 hover:text-white"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Contact Info</h3>
+            <ul class="space-y-2">
+              <li class="text-gray-400">
+                <i class="fas fa-phone mr-2"></i> +1 234 567 890
+              </li>
+              <li class="text-gray-400">
+                <i class="fas fa-envelope mr-2"></i> info@techshop.com
+              </li>
+              <li class="text-gray-400">
+                <i class="fas fa-map-marker-alt mr-2"></i> 123 Tech Street
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-facebook-f"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="#" class="text-gray-400 hover:text-white"
+                ><i class="fab fa-linkedin-in"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+          <p class="text-gray-400">© 2025 Tech Shop. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="products.js"></script>
+    <script src="auth.js"></script>
+    <script>
+      // Get product ID from URL parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const productId = parseInt(urlParams.get("id"));
+
+      // Find the product
+      const product = products.find((p) => p.id === productId);
+
+      // Function to toggle mobile menu
+      function toggleMenu() {
+        const mobileMenu = document.getElementById("mobileMenu");
+        mobileMenu.classList.toggle("hidden");
+      }
+
+      // Function to handle form submission
+      document
+        .getElementById("checkoutForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          if (!product) {
+            alert("Product not found. Please try again.");
+            return;
+          }
+
+          try {
+            // Check if user is logged in first
+            const { isLoggedIn } = await checkAuth();
+
+            if (!isLoggedIn) {
+              alert("Please log in to complete your purchase.");
+              // Save the current product ID to return after login
+              localStorage.setItem("pendingPurchaseId", productId);
+              window.location.href = "login.html?redirect=checkout";
+              return;
+            }
+
+            // Show loading state
+            const submitButton = document.getElementById("placeOrderBtn");
+            const originalButtonText = submitButton.innerHTML;
+            submitButton.innerHTML =
+              '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
+            submitButton.disabled = true;
+
+            // Create order via API
+            const response = await fetch("backend/api/orders/create.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                product_id: product.id,
+              }),
+            });
+
+            const data = await response.json();
+
+            // Reset button
+            submitButton.innerHTML = originalButtonText;
+            submitButton.disabled = false;
+
+            if (data.status) {
+              // Show success message
+              alert(
+                `Thank you for your purchase of ${product.name}! Your order has been placed successfully.`
+              );
+
+              // Redirect to profile page with orders tab active
+              window.location.href = "profile.html?tab=orders";
+            } else {
+              // Show error message
+              alert(
+                `Error: ${
+                  data.message || "Failed to place order. Please try again."
+                }`
+              );
+            }
+          } catch (error) {
+            console.error("Error creating order:", error);
+            alert(
+              "An error occurred while processing your order. Please try again later."
+            );
+          }
+        });
+
+      // Load product details if product exists
+      if (product) {
+        document.title = `Checkout: ${product.name} - TechShop`;
+
+        // Update product summary
+        document.getElementById("productSummary").innerHTML = `
+          <div class="flex items-center gap-4 mb-4">
+            <img src="${product.image}" alt="${
+          product.name
+        }" class="w-16 h-16 object-contain rounded-lg">
+            <div>
+              <h3 class="font-bold">${product.name}</h3>
+              <p class="text-gray-400 text-sm">Quantity: 1</p>
+            </div>
+          </div>
+          <div class="flex justify-between text-gray-300 border-t border-gray-700 pt-3">
+            <span>Subtotal</span>
+            <span>$${product.price.toFixed(2)}</span>
+          </div>
+          <div class="flex justify-between text-gray-300">
+            <span>Shipping</span>
+            <span>Free</span>
+          </div>
+        `;
+
+        // Update total
+        document.getElementById(
+          "total"
+        ).textContent = `$${product.price.toFixed(2)}`;
+      } else {
+        // Handle product not found
+        document.getElementById("productSummary").innerHTML = `
+          <div class="text-center py-4">
+            <i class="fas fa-exclamation-circle text-red-500 text-2xl mb-2"></i>
+            <p class="text-gray-300">Product not found</p>
+          </div>
+        `;
+
+        // Disable place order button
+        document.getElementById("placeOrderBtn").disabled = true;
+        document
+          .getElementById("placeOrderBtn")
+          .classList.add("opacity-50", "cursor-not-allowed");
+      }
+    </script>
+  </body>
+</html>
